@@ -1,8 +1,8 @@
 /**
- * @name Chillax Obsidian Nexus Prime
+ * @name Chillax Anime Sakura Cyber
  * @author King & Chillax Squad
- * @version 5.0.0-ultimate
- * @description The ultimate custom Discord theme engine. Loaded with hyper-fluid, hardware-accelerated animations, futuristic glassmorphism cards, interactive hover effects, glowing aura rings, neon pulse accents, custom message bubbles, and zero layout lag.
+ * @version 6.0.0-anime
+ * @description A completely custom, built-from-scratch anime-inspired theme engine. Features soft pastel neon accents, immersive background blur depth-of-field, glowing glassmorphism panels, floating animations, custom stylized message cards, and butter-smooth GPU rendering.
 */
 
 :root {
@@ -11,22 +11,22 @@
     --font-size: 13px;
     --group-chat-font: "Monoton";
 
-    /* Neon Cyber-Crimson & Obsidian Palette */
-    --accentcolor: 255, 45, 85;
-    --accentcolorV2: #ff2d55;
-    --accent-glow: rgba(255, 45, 85, 0.45);
-    --accent-glow-subtle: rgba(255, 45, 85, 0.15);
+    /* Anime Pastel Sakura & Neon Violet Palette */
+    --accentcolor: 255, 122, 178;
+    --accentcolorV2: #ff7ab2;
+    --accent-glow: rgba(255, 122, 178, 0.4);
+    --accent-glow-subtle: rgba(255, 122, 178, 0.15);
     
-    --obsidian-base: #050507;
-    --obsidian-surface: rgba(12, 14, 19, 0.8);
-    --obsidian-surface-hover: rgba(20, 23, 31, 0.9);
-    --obsidian-card: rgba(16, 18, 24, 0.7);
+    --anime-base: #0f0b14;
+    --anime-surface: rgba(22, 16, 32, 0.75);
+    --anime-surface-hover: rgba(32, 23, 46, 0.85);
+    --anime-card: rgba(26, 19, 38, 0.65);
     
-    --window-margin: 16px;
-    --window-colour: rgba(8, 9, 13, 0.85);
-    --window-blur: 16px;
-    --window-border-radius: 14px;
-    --sidebar-colour: rgba(12, 14, 19, 0.6);
+    --window-margin: 18px;
+    --window-colour: rgba(15, 11, 20, 0.82);
+    --window-blur: 18px;
+    --window-border-radius: 16px;
+    --sidebar-colour: rgba(22, 16, 32, 0.55);
 
     /* Radial Status Configurations */
     --rs-small-spacing: 0px;
@@ -36,21 +36,21 @@
     --rs-medium-width: 3.5px;
     --rs-large-width: 4.5px;
     --rs-avatar-shape: 50%;
-    --rs-online-color: #00ff88;
-    --rs-idle-color: #ffaa00;
-    --rs-dnd-color: #ff3344;
-    --rs-offline-color: #555c6d;
-    --rs-streaming-color: #8833ff;
-    --rs-invisible-color: #555c6d;
+    --rs-online-color: #ff7ab2;
+    --rs-idle-color: #ffb86c;
+    --rs-dnd-color: #ff5555;
+    --rs-offline-color: #6272a4;
+    --rs-streaming-color: #bd93f9;
+    --rs-invisible-color: #6272a4;
 }
 
 /* ========================================================================== */
-/* 1. FLUID GPU-ACCELERATED ANIMATION ENGINE                                  */
+/* 1. GPU LAYER ACCELERATION & ANIME BLUR PHYSICS ENGINE                      */
 /* ========================================================================== */
 
 *, *::before, *::after {
     backface-visibility: hidden;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .appMount-3lHmkl, 
@@ -64,25 +64,37 @@ nav[class*="guilds-"] {
     will-change: transform, opacity;
 }
 
-@keyframes neonPulse {
-    0% { box-shadow: 0 0 10px var(--accent-glow-subtle); }
-    50% { box-shadow: 0 0 25px var(--accent-glow); }
-    100% { box-shadow: 0 0 10px var(--accent-glow-subtle); }
+@keyframes animeFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
 }
 
-@keyframes floatSmooth {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
+@keyframes sakuraGlow {
+    0% { box-shadow: 0 0 12px var(--accent-glow-subtle); }
+    50% { box-shadow: 0 0 28px var(--accent-glow); }
+    100% { box-shadow: 0 0 12px var(--accent-glow-subtle); }
 }
 
 /* ========================================================================== */
-/* 2. BASE WINDOW & CLEAN TRANS TRANSPARENCY                                 */
+/* 2. BASE APP & AMBIENT ANIME WALLPAPER BACKDROP                           */
 /* ========================================================================== */
 
 body {
-    background-color: var(--obsidian-base);
+    background-color: var(--anime-base);
     font-family: var(--font-name);
-    color: #e0e2eb;
+    color: #f8f8f2;
+}
+
+/* Simulated Anime Depth Blur Background Base */
+.appMount-3lHmkl::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(189, 147, 249, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 122, 178, 0.12) 0%, transparent 40%),
+                var(--anime-base);
+    z-index: -1;
+    pointer-events: none;
 }
 
 .theme-dark, .theme-light {
@@ -90,11 +102,11 @@ body {
     --background-secondary: transparent;
     --background-secondary-alt: transparent;
     --background-tertiary: transparent;
-    --background-accent: rgba(255, 255, 255, 0.05);
-    --background-floating: rgba(10, 11, 15, 0.96);
-    --background-message-hover: rgba(255, 255, 255, 0.03);
-    --channel-text-area-background: rgba(0, 0, 0, 0.4);
-    --elevation-stroke: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --background-accent: rgba(255, 255, 255, 0.04);
+    --background-floating: rgba(18, 13, 26, 0.95);
+    --background-message-hover: rgba(255, 122, 178, 0.03);
+    --channel-text-area-background: rgba(0, 0, 0, 0.35);
+    --elevation-stroke: 0 0 0 1px rgba(255, 122, 178, 0.1);
     --FG-cards-banner-background: transparent !important;
 }
 
@@ -111,87 +123,85 @@ div[class*="userProfileModalInner-"] div[class*="banner-"] {
 }
 
 /* ========================================================================== */
-/* 3. ULTRA-SMOOTH HOVER NAVIGATION & SIDEBAR GLASS                          */
+/* 3. SOFT GLOW NAVIGATION & SIDEBAR BLUR                                     */
 /* ========================================================================== */
 
 nav[class*="guilds-"] {
-    background: rgba(6, 7, 10, 0.75) !important;
-    backdrop-filter: blur(14px);
-    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    background: rgba(12, 9, 17, 0.8) !important;
+    backdrop-filter: blur(16px);
+    border-right: 1px solid rgba(255, 122, 178, 0.08);
 }
 
-/* Animated Guild Icons with Glow on Hover */
 nav[class*="guilds-"] div[class*="listItem-"] {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.25s ease;
 }
 
 nav[class*="guilds-"] div[class*="listItem-"]:hover {
-    transform: translateX(4px);
+    transform: translateX(5px);
 }
 
 div[class*="sidebar-"] {
     background: var(--sidebar-colour) !important;
-    backdrop-filter: blur(12px);
-    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(14px);
+    border-right: 1px solid rgba(255, 122, 178, 0.08);
     border-top-left-radius: var(--window-border-radius);
     border-bottom-left-radius: var(--window-border-radius);
 }
 
 /* ========================================================================== */
-/* 4. ANIMATED GLASS CHAT BUBBLES & INTERACTIVE INPUT BAR                    */
+/* 4. CHAT MESSAGES & GLOWING SAKURA INPUT BAR                                */
 /* ========================================================================== */
 
 div[class*="message-"] {
     transition: background 0.2s ease, transform 0.2s ease;
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 2px 0;
 }
 
 div[class*="message-"]:hover {
-    background: rgba(255, 255, 255, 0.022);
+    background: rgba(255, 122, 178, 0.035);
 }
 
-/* Glowing Dynamic Chat Input */
 div[class*="channelTextArea-"] {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(10, 7, 15, 0.55) !important;
+    border: 1px solid rgba(255, 122, 178, 0.15);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 div[class*="channelTextArea-"]:focus-within {
     border-color: var(--accentcolorV2) !important;
-    box-shadow: 0 0 20px var(--accent-glow), inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 22px var(--accent-glow), inset 0 2px 8px rgba(0, 0, 0, 0.4);
     transform: translateY(-1px);
 }
 
 /* ========================================================================== */
-/* 5. CYBER-PULSE CARDS (Friends, Members, Settings with Physics Hover)       */
+/* 5. ANIME FROSTED GLASS CARDS (Friends, Members, Settings)                  */
 /* ========================================================================== */
 
 div[class*="peopleListItem-"], 
 div[class*="member-"],
 div[class*="card-"] {
-    background: var(--obsidian-card) !important;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 12px;
+    background: var(--anime-card) !important;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 122, 178, 0.08);
+    border-radius: 14px;
     margin: 6px 8px;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 div[class*="peopleListItem-"]:hover, 
 div[class*="member-"]:hover {
     transform: translateX(6px) scale(1.01);
-    background: var(--obsidian-surface-hover) !important;
+    background: var(--anime-surface-hover) !important;
     border-color: var(--accentcolorV2);
-    box-shadow: 0 8px 25px var(--accent-glow-subtle);
+    box-shadow: 0 10px 30px var(--accent-glow-subtle);
 }
 
 /* ========================================================================== */
-/* 6. HOLOGRAPHIC TOOLTIPS & GLOWING SCROLLBARS                             */
+/* 6. PASTEL GLOW SCROLLBARS & FLOATING TOOLTIPS                              */
 /* ========================================================================== */
 
 ::-webkit-scrollbar {
@@ -201,7 +211,7 @@ div[class*="member-"]:hover {
 
 ::-webkit-scrollbar-thumb {
     background: var(--accentcolorV2) !important;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 0 10px var(--accent-glow);
 }
 
@@ -209,13 +219,12 @@ div[class*="member-"]:hover {
     background: transparent !important;
 }
 
-/* Futuristic Tooltips with Entrance Glow */
 div[class*="tooltip-"] {
-    background-color: rgba(8, 9, 13, 0.95) !important;
+    background-color: rgba(15, 11, 20, 0.95) !important;
     backdrop-filter: blur(16px);
     border: 1px solid var(--accentcolorV2);
-    border-radius: 10px;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 15px var(--accent-glow-subtle);
-    color: #fff !important;
-    animation: floatSmooth 3s ease-in-out infinite;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 15px var(--accent-glow-subtle);
+    color: #f8f8f2 !important;
+    animation: animeFloat 3.5s ease-in-out infinite;
 }
