@@ -1,10 +1,10 @@
 /**
- * @name Chillax (Optimized for Performance)
+ * @name Chillax (Ultra Performance & Streamlined)
  * @author Chillax Squad
  * @authorLink https://github.com/warrayquipsome/Chillax#Authors
- * @version 2.1.3-opt
+ * @version 2.1.4-opt
  * @invite DrfX6286kF
- * @description The theme where calm meets customization — optimized to eliminate lag and heavy `:has()` queries while preserving layout smoothness.
+ * @description The theme where calm meets customization — heavily optimized for speed, zero-lag animations, clean cards, and extra quality-of-life features.
  * @source https://github.com/warrayquipsome/Chillax
 */
 
@@ -137,31 +137,86 @@
 }
 
 /* ========================================================================== */
-/* PERFORMANCE OPTIMIZATIONS (GPU Acceleration & Heavy :has() Mitigation)    */
+/* 1. REMOVE DIRECT MESSAGE / ONLINE STATUS HEADER OVERLAYS & BUGGY BANNERS  */
 /* ========================================================================== */
 
-/* 1. Force GPU Layer Promotion & Disable Expensive Shadow/Filter Passes */
-.theme-dark, .theme-light {
-    transform: translateZ(0);
-    backface-visibility: hidden;
+/* Hides the intrusive red banner overlay patches overlapping friend cards/profiles */
+div[class*="peopleListItem-"] div[class*="activity-"],
+div[class*="peopleListItem-"] [class*="body-"] > div[style*="background"],
+.theme-dark div[class*="peopleListItem-"]::before,
+.theme-light div[class*="peopleListItem-"]::before {
+    display: none !important;
 }
 
-/* 2. Replace layout-thrashing heavy structural queries with direct fast selectors */
+/* Clean up Friend Grid card background banners that caused visual overlap */
+.theme-dark, .theme-light {
+    --FG-cards-banner-background: transparent !important;
+}
+
+/* Clean profile card background tint clutter */
+div[class*="profilePanel-"] div[class*="headerNormal-"],
+div[class*="userProfileModalInner-"] div[class*="banner-"] {
+    background-color: transparent !important;
+}
+
+/* ========================================================================== */
+/* 2. ADVANCED PERFORMANCE & LAGG-KILLING REFINEMENTS                         */
+/* ========================================================================== */
+
+/* Force hardware acceleration for core panels and eliminate heavy repaints */
 div[class*="layer-"], 
 div[class*="standardSidebarView-"], 
 div[class*="sidebar-"],
-div[class*="chat-"] {
-    will-change: auto;
+div[class*="chat-"],
+div[class*="peopleColumn-"] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
 }
 
-/* 3. Optimize backdrop-filter performance by limiting repaint zones */
-.appMount-3lHmkl, 
-.background-1QMIev,
-div[class*="bg-"] {
+/* Strip expensive layout calculations caused by nested pseudo-classes */
+*, *::before, *::after {
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Optimize scrollers to prevent layout thrashing */
+div[class*="scroller-"] {
+    contain: layout style paint;
     transform: translate3d(0, 0, 0);
 }
 
-/* 4. Streamline animations to use purely composite properties (opacity, transform) */
-* {
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+/* ========================================================================== */
+/* 3. NEW ADDED FEATURES (Sleek UI polish, rounded tooltips, crisp borders)    */
+/* ========================================================================== */
+
+/* Sleek Modern Tooltips */
+div[class*="tooltip-"] {
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced Smooth Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accentcolorV2) !important;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+/* Crisp Input Field Focus Glow */
+input[class*="input-"]:focus, 
+div[class*="channelTextArea-"]:focus-within {
+    border-color: var(--accentcolorV2) !important;
+    box-shadow: 0 0 10px rgba(251, 84, 84, 0.25);
+    transition: all 0.2s ease;
 }
