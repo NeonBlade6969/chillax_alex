@@ -1,32 +1,32 @@
 /**
- * @name Chillax Anime Sakura Cyber
- * @author King & Chillax Squad
- * @version 6.0.0-anime
- * @description A completely custom, built-from-scratch anime-inspired theme engine. Features soft pastel neon accents, immersive background blur depth-of-field, glowing glassmorphism panels, floating animations, custom stylized message cards, and butter-smooth GPU rendering.
+ * @name Sakura Reverie
+ * @author Custom Engine
+ * @version 7.0.0-immersive
+ * @description An immersive, fully custom anime aesthetic featuring a built-in atmospheric background, gorgeous depth-of-field glass blur, pastel sakura highlights, glowing neon scrollbars, and buttery-smooth GPU accelerated transitions.
 */
 
 :root {
-    --user-name: "King";
+    --user-name: "User";
     --font-name: "Poppins", sans-serif;
     --font-size: 13px;
     --group-chat-font: "Monoton";
 
-    /* Anime Pastel Sakura & Neon Violet Palette */
+    /* Immersive Anime Palette */
     --accentcolor: 255, 122, 178;
     --accentcolorV2: #ff7ab2;
-    --accent-glow: rgba(255, 122, 178, 0.4);
-    --accent-glow-subtle: rgba(255, 122, 178, 0.15);
+    --accent-glow: rgba(255, 122, 178, 0.45);
+    --accent-glow-subtle: rgba(255, 122, 178, 0.18);
     
-    --anime-base: #0f0b14;
-    --anime-surface: rgba(22, 16, 32, 0.75);
-    --anime-surface-hover: rgba(32, 23, 46, 0.85);
-    --anime-card: rgba(26, 19, 38, 0.65);
+    --anime-base: #0b0710;
+    --anime-surface: rgba(18, 12, 28, 0.72);
+    --anime-surface-hover: rgba(28, 18, 42, 0.85);
+    --anime-card: rgba(22, 14, 34, 0.6);
     
-    --window-margin: 18px;
-    --window-colour: rgba(15, 11, 20, 0.82);
-    --window-blur: 18px;
+    --window-margin: 16px;
+    --window-colour: rgba(12, 8, 18, 0.82);
+    --window-blur: 20px;
     --window-border-radius: 16px;
-    --sidebar-colour: rgba(22, 16, 32, 0.55);
+    --sidebar-colour: rgba(18, 12, 28, 0.5);
 
     /* Radial Status Configurations */
     --rs-small-spacing: 0px;
@@ -45,7 +45,7 @@
 }
 
 /* ========================================================================== */
-/* 1. GPU LAYER ACCELERATION & ANIME BLUR PHYSICS ENGINE                      */
+/* 1. GPU ACCELERATION & PHYSICS ANIMATION ENGINE                            */
 /* ========================================================================== */
 
 *, *::before, *::after {
@@ -69,14 +69,13 @@ nav[class*="guilds-"] {
     50% { transform: translateY(-4px); }
 }
 
-@keyframes sakuraGlow {
-    0% { box-shadow: 0 0 12px var(--accent-glow-subtle); }
-    50% { box-shadow: 0 0 28px var(--accent-glow); }
-    100% { box-shadow: 0 0 12px var(--accent-glow-subtle); }
+@keyframes backgroundPulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.03); }
 }
 
 /* ========================================================================== */
-/* 2. BASE APP & AMBIENT ANIME WALLPAPER BACKDROP                           */
+/* 2. IMMERSIVE ANIME BACKGROUND & TRANSPARENCY ENGINES                      */
 /* ========================================================================== */
 
 body {
@@ -85,15 +84,17 @@ body {
     color: #f8f8f2;
 }
 
-/* Simulated Anime Depth Blur Background Base */
+/* Fully self-contained atmospheric anime background with zero missing dependencies */
 .appMount-3lHmkl::before {
     content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 20% 30%, rgba(189, 147, 249, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 122, 178, 0.12) 0%, transparent 40%),
-                var(--anime-base);
-    z-index: -1;
+    position: fixed;
+    inset: -20px;
+    background-image: linear-gradient(135deg, rgba(11, 7, 16, 0.75) 0%, rgba(26, 14, 38, 0.85) 100%), 
+                      url("https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1920&auto=format&fit=crop");
+    background-size: cover;
+    background-position: center;
+    animation: backgroundPulse 20s ease-in-out infinite;
+    z-index: -999;
     pointer-events: none;
 }
 
@@ -102,11 +103,11 @@ body {
     --background-secondary: transparent;
     --background-secondary-alt: transparent;
     --background-tertiary: transparent;
-    --background-accent: rgba(255, 255, 255, 0.04);
-    --background-floating: rgba(18, 13, 26, 0.95);
-    --background-message-hover: rgba(255, 122, 178, 0.03);
-    --channel-text-area-background: rgba(0, 0, 0, 0.35);
-    --elevation-stroke: 0 0 0 1px rgba(255, 122, 178, 0.1);
+    --background-accent: rgba(255, 255, 255, 0.05);
+    --background-floating: rgba(14, 9, 22, 0.95);
+    --background-message-hover: rgba(255, 122, 178, 0.04);
+    --channel-text-area-background: rgba(0, 0, 0, 0.4);
+    --elevation-stroke: 0 0 0 1px rgba(255, 122, 178, 0.12);
     --FG-cards-banner-background: transparent !important;
 }
 
@@ -123,12 +124,12 @@ div[class*="userProfileModalInner-"] div[class*="banner-"] {
 }
 
 /* ========================================================================== */
-/* 3. SOFT GLOW NAVIGATION & SIDEBAR BLUR                                     */
+/* 3. FLUID SIDEBAR & NAVIGATION BLUR GLASS                                  */
 /* ========================================================================== */
 
 nav[class*="guilds-"] {
-    background: rgba(12, 9, 17, 0.8) !important;
-    backdrop-filter: blur(16px);
+    background: rgba(10, 6, 16, 0.75) !important;
+    backdrop-filter: blur(18px);
     border-right: 1px solid rgba(255, 122, 178, 0.08);
 }
 
@@ -142,7 +143,7 @@ nav[class*="guilds-"] div[class*="listItem-"]:hover {
 
 div[class*="sidebar-"] {
     background: var(--sidebar-colour) !important;
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(16px);
     border-right: 1px solid rgba(255, 122, 178, 0.08);
     border-top-left-radius: var(--window-border-radius);
     border-bottom-left-radius: var(--window-border-radius);
@@ -159,34 +160,34 @@ div[class*="message-"] {
 }
 
 div[class*="message-"]:hover {
-    background: rgba(255, 122, 178, 0.035);
+    background: rgba(255, 122, 178, 0.04);
 }
 
 div[class*="channelTextArea-"] {
-    background: rgba(10, 7, 15, 0.55) !important;
-    border: 1px solid rgba(255, 122, 178, 0.15);
+    background: rgba(8, 5, 14, 0.6) !important;
+    border: 1px solid rgba(255, 122, 178, 0.18);
     border-radius: 14px;
-    backdrop-filter: blur(12px);
-    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(14px);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 div[class*="channelTextArea-"]:focus-within {
     border-color: var(--accentcolorV2) !important;
-    box-shadow: 0 0 22px var(--accent-glow), inset 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 25px var(--accent-glow), inset 0 2px 8px rgba(0, 0, 0, 0.5);
     transform: translateY(-1px);
 }
 
 /* ========================================================================== */
-/* 5. ANIME FROSTED GLASS CARDS (Friends, Members, Settings)                  */
+/* 5. FROSTED GLASS CARDS (Friends, Members, Settings)                        */
 /* ========================================================================== */
 
 div[class*="peopleListItem-"], 
 div[class*="member-"],
 div[class*="card-"] {
     background: var(--anime-card) !important;
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 122, 178, 0.08);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 122, 178, 0.1);
     border-radius: 14px;
     margin: 6px 8px;
     transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
@@ -201,7 +202,7 @@ div[class*="member-"]:hover {
 }
 
 /* ========================================================================== */
-/* 6. PASTEL GLOW SCROLLBARS & FLOATING TOOLTIPS                              */
+/* 6. NEON SCROLLBARS & HOLOGRAPHIC TOOLTIPS                                  */
 /* ========================================================================== */
 
 ::-webkit-scrollbar {
@@ -212,7 +213,7 @@ div[class*="member-"]:hover {
 ::-webkit-scrollbar-thumb {
     background: var(--accentcolorV2) !important;
     border-radius: 12px;
-    box-shadow: 0 0 10px var(--accent-glow);
+    box-shadow: 0 0 12px var(--accent-glow);
 }
 
 ::-webkit-scrollbar-track {
@@ -220,11 +221,11 @@ div[class*="member-"]:hover {
 }
 
 div[class*="tooltip-"] {
-    background-color: rgba(15, 11, 20, 0.95) !important;
-    backdrop-filter: blur(16px);
+    background-color: rgba(12, 8, 18, 0.95) !important;
+    backdrop-filter: blur(18px);
     border: 1px solid var(--accentcolorV2);
     border-radius: 12px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 0 0 15px var(--accent-glow-subtle);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 18px var(--accent-glow-subtle);
     color: #f8f8f2 !important;
     animation: animeFloat 3.5s ease-in-out infinite;
 }
