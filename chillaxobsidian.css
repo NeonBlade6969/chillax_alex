@@ -1,34 +1,53 @@
 /**
- * @name Chillax Obsidian
+ * @name Chillax Obsidian Nexus
  * @author King & Chillax Squad
- * @version 3.0.0-custom
- * @description A fully custom, ultra-optimized version built from scratch for maximum speed, zero stutter, hardware-accelerated animations, and a sleek dark aesthetic.
+ * @version 4.0.0-fullbase
+ * @description A fully custom, built-from-scratch Discord theme engine. Features high-performance glassmorphism, hardware-accelerated GPU layers, customized message bubbles, a floating dock navigation layout, sleek profile cards, and absolute zero lag.
 */
 
-/* Core Theme Engine Base */
-@import url("https://warrayquipsome.github.io/Chillax/chillax.css");
-
 :root {
-    /* Customization Roots */
+    /* Core User Identity & Typography */
     --user-name: "King";
     --font-name: "Poppins", sans-serif;
     --font-size: 13px;
-    
-    /* Custom Color Palette (Deep Obsidian & Neon Crimson) */
+    --group-chat-font: "Monoton";
+
+    /* Custom Color Palette (Deep Obsidian & Neon Crimson Base) */
     --accentcolor: 255, 75, 95;
     --accentcolorV2: #ff4b5f;
-    --obsidian-bg: #0c0d10;
-    --obsidian-card: rgba(20, 22, 28, 0.75);
+    --accent-glow: rgba(255, 75, 95, 0.35);
     
-    /* Window Customization */
+    /* Background & Surface Layers */
+    --obsidian-base: #07080a;
+    --obsidian-surface: rgba(14, 16, 21, 0.75);
+    --obsidian-surface-hover: rgba(22, 25, 33, 0.85);
+    --obsidian-card: rgba(18, 20, 26, 0.65);
+    
+    /* Window & Glass Controls */
     --window-margin: 16px;
-    --window-colour: rgba(12, 13, 16, 0.85);
-    --window-blur: 12px;
+    --window-colour: rgba(10, 11, 15, 0.82);
+    --window-blur: 14px;
     --window-border-radius: 12px;
+    --sidebar-colour: rgba(14, 16, 21, 0.5);
+
+    /* Radial Status Customization */
+    --rs-small-spacing: 0px;
+    --rs-large-spacing: 0px;
+    --rs-medium-spacing: 0px;
+    --rs-small-width: 2.5px;
+    --rs-medium-width: 3.5px;
+    --rs-large-width: 4.5px;
+    --rs-avatar-shape: 50%;
+    --rs-online-color: #1df594;
+    --rs-idle-color: #faa61a;
+    --rs-dnd-color: #f04747;
+    --rs-offline-color: #636b75;
+    --rs-streaming-color: #643da7;
+    --rs-invisible-color: #636b75;
 }
 
 /* ========================================================================== */
-/* 1. ULTIMATE HARDWARE ACCELERATION & ZERO-LAG ENGINE                         */
+/* 1. HARDWARE ACCELERATION & RENDER ENGINE OPTIMIZATION                     */
 /* ========================================================================== */
 
 *, *::before, *::after {
@@ -36,19 +55,43 @@
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Promote core layers to GPU to entirely eliminate layout lag */
+/* Promote core application windows and wrappers to the GPU */
 .appMount-3lHmkl, 
 div[class*="layer-"], 
 div[class*="standardSidebarView-"], 
 div[class*="sidebar-"],
 div[class*="chat-"],
-div[class*="peopleColumn-"] {
+div[class*="peopleColumn-"],
+nav[class*="guilds-"] {
     transform: translateZ(0);
     will-change: transform, opacity;
 }
 
 /* ========================================================================== */
-/* 2. COMPLETELY REMOVED CLUTTER & OVERLAPS (No Online/DM Banner Mess)        */
+/* 2. BASE WINDOW & APP TRANSPARENCY OVERRIDES                                */
+/* ========================================================================== */
+
+body {
+    background-color: var(--obsidian-base);
+    font-family: var(--font-name);
+    color: #dcddde;
+}
+
+.theme-dark, .theme-light {
+    --background-primary: transparent;
+    --background-secondary: transparent;
+    --background-secondary-alt: transparent;
+    --background-tertiary: transparent;
+    --background-accent: rgba(255, 255, 255, 0.04);
+    --background-floating: rgba(12, 14, 18, 0.95);
+    --background-message-hover: rgba(255, 255, 255, 0.025);
+    --channel-text-area-background: rgba(0, 0, 0, 0.3);
+    --elevation-stroke: 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --FG-cards-banner-background: transparent !important;
+}
+
+/* ========================================================================== */
+/* 3. CLUTTER REMOVAL (Clean Profiles & No DM Banner Overlaps)                */
 /* ========================================================================== */
 
 div[class*="peopleListItem-"] div[class*="activity-"],
@@ -58,38 +101,83 @@ div[class*="peopleListItem-"] [class*="body-"] > div[style*="background"],
     display: none !important;
 }
 
-.theme-dark, .theme-light {
-    --FG-cards-banner-background: transparent !important;
-}
-
 div[class*="profilePanel-"] div[class*="headerNormal-"],
 div[class*="userProfileModalInner-"] div[class*="banner-"] {
     background-color: transparent !important;
 }
 
 /* ========================================================================== */
-/* 3. CUSTOM UI REDESIGN & POLISH                                            */
+/* 4. CUSTOM GLASSMORPHISM SIDEBAR & GUILD LIST                               */
 /* ========================================================================== */
 
-/* Custom Glassmorphism Member & Friend Cards */
+nav[class*="guilds-"] {
+    background: rgba(8, 9, 12, 0.65) !important;
+    backdrop-filter: blur(10px);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+div[class*="sidebar-"] {
+    background: var(--sidebar-colour) !important;
+    backdrop-filter: blur(8px);
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    border-top-left-radius: var(--window-border-radius);
+    border-bottom-left-radius: var(--window-border-radius);
+}
+
+/* ========================================================================== */
+/* 5. REDESIGNED CHAT MESSAGES & INPUT BOX                                    */
+/* ========================================================================== */
+
+/* Glass Message Container Hover States */
+div[class*="message-"] {
+    transition: background 0.15s ease;
+}
+
+div[class*="message-"]:hover {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+/* Custom Styled Modern Input Bar */
+div[class*="channelTextArea-"] {
+    background: rgba(0, 0, 0, 0.45) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+div[class*="channelTextArea-"]:focus-within {
+    border-color: var(--accentcolorV2) !important;
+    box-shadow: 0 0 14px var(--accent-glow), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================================================== */
+/* 6. GLASS CARD ENHANCEMENTS (Members, Friends, Settings)                    */
+/* ========================================================================== */
+
 div[class*="peopleListItem-"], 
-div[class*="member-"] {
+div[class*="member-"],
+div[class*="card-"] {
     background: var(--obsidian-card) !important;
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.03);
     border-radius: 10px;
-    margin: 4px 8px;
-    transition: transform 0.2s ease, background 0.2s ease;
+    margin: 4px 6px;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 div[class*="peopleListItem-"]:hover, 
 div[class*="member-"]:hover {
     transform: translateX(4px);
-    background: rgba(30, 34, 44, 0.85) !important;
-    border-color: rgba(255, 75, 95, 0.3);
+    background: var(--obsidian-surface-hover) !important;
+    border-color: rgba(255, 75, 95, 0.25);
 }
 
-/* Custom Sleek Scrollbars */
+/* ========================================================================== */
+/* 7. CUSTOM SCROLLBARS & MODAL POLISH                                        */
+/* ========================================================================== */
+
 ::-webkit-scrollbar {
     width: 5px !important;
     height: 5px !important;
@@ -104,27 +192,12 @@ div[class*="member-"]:hover {
     background: transparent !important;
 }
 
-/* Modern Rounded Tooltips with Glow */
+/* Ultra Sleek Floating Tooltips */
 div[class*="tooltip-"] {
-    background-color: rgba(12, 13, 16, 0.95) !important;
-    backdrop-filter: blur(10px);
+    background-color: rgba(10, 11, 15, 0.95) !important;
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 75, 95, 0.2);
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     color: #fff !important;
-}
-
-/* Input Fields & Text Areas Enhancement */
-input[class*="input-"], 
-div[class*="channelTextArea-"] {
-    background: rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    transition: all 0.25s ease;
-}
-
-input[class*="input-"]:focus, 
-div[class*="channelTextArea-"]:focus-within {
-    border-color: var(--accentcolorV2) !important;
-    box-shadow: 0 0 12px rgba(255, 75, 95, 0.25);
 }
